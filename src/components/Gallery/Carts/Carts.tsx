@@ -61,8 +61,8 @@ const Carts = ({cartsProf,carts}:{cartsProf:boolean, carts:Array<iModel>}) => {
     // let cartsElements = carts.map(m => <Cart cart={m} artist = {users[m.id_artist-1]}/>)
     // let cartsElements = carts?.map(m => <Cart cart={m} artist = {users[m.id_artist-1]}/>)
     // let cartsElementsMain = modelsToShow.map(m=> <Cart cart={m} artist = {users[m.id_artist-1]}/>)
-    let cartsElementsMain = modelsToShow.map(m=> <Cart cart={m} />)
-    let userElementsMain = usersToShow.map(m=> <div>{m.name}</div>)
+    let cartsElementsMain = modelsToShow.map(m=> <Cart key={m.id} cart={m} />)
+    let userElementsMain = usersToShow.map(m=> <div key={m.id}>{m.name}</div>)
     return (
 
 

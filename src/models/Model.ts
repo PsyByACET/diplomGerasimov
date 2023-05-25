@@ -3,16 +3,16 @@
 export interface iModel {
     id: number;
     name: string;
-    licence: string;
     link_photo: string;
-    id_artist: number,
     description: string;
-    categories: Array<string>;
-    formats: Array<string>;
     tags: Array<string>;
     price: number;
-    like_count: number;
+    likes: number;
     link_download: string;
-    size: string;
+    model3d: string;
+    size: number;
+    userId: number;
+    categoryId: number;
+    licenseId: number
 }
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import {iModel} from "../models/Model";
 
 export async function loadAllModel(): Promise<iModel[]> {
-  const res = await axios.get(`http://localhost:5001/api/models`);
+  const res = await axios.get(`http://localhost:5001/api/model`);
   const transformedData = ModelAdapter.transformArray(res);
   return (transformedData);
 

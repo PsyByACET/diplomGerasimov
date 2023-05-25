@@ -6,17 +6,17 @@ export class ModelAdapter {
         return {
             id: modelItem.id,
             name: modelItem.name,
-            licence: modelItem.license,
             link_photo: modelItem.link_photo,
-            id_artist: modelItem.id_artist,
             description: modelItem.description,
-            categories: modelItem.categories,
-            formats: modelItem.formats,
             tags: modelItem.tags,
             price: modelItem.price,
-            like_count: modelItem.like_count,
+            likes: modelItem.likes,
             link_download: modelItem.link_download,
+            model3d: modelItem.model3d,
             size: modelItem.size,
+            userId: modelItem.userId,
+            categoryId: modelItem.categoryId,
+            licenseId:  modelItem.licenseId
         };
     }
     static transformArray(data: any): iModel[] {

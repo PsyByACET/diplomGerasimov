@@ -1,17 +1,3 @@
-.modal {
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0,0,0,0.60);
-    position: fixed;
-    top: 0;
-    left: 0;
-    justify-content: center;
-    transform: scale(0);
-    overflow: auto;
-}
-.modal.active {
-    transform: scale(1);
-}
 .modal_content {
     width: 90vw;
     margin: 40px auto;
@@ -23,8 +9,10 @@
     grid-gap: 20px;
 
 }
-.photo img{
+.photo{
     width: 100%;
+    height: 500px;
+    background-color: white;
 }
 .artist {
     display: flex;
@@ -70,10 +58,15 @@
     display: flex;
     flex-direction: column;
     border-radius: 8px;
+    text-align: left;
+}
+.cart_price a{
+    width: 100%;
+
 }
 .cart_price span {
     color: #B5FBF9;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 600;
 }
 .cart_price button{
@@ -81,8 +74,10 @@
     font-size: 20px;
     font-weight: 600;
     color: #212f30;
+    margin-top: 60px;
     border-radius: 6px;
-
+    height: 65px;
+    width: 100%;
     border: none;
     outline:none;
 }

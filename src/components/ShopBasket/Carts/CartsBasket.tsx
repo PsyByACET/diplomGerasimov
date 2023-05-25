@@ -9,9 +9,14 @@ import React from "react";
 const CartsBasket = ({carts,users}:{carts:Array<iModel>,users:Array<iUser>}) => {
     let testMass = users[0].basket;
     const filterCarts = carts.filter(m => testMass.includes(m.id));
-    let cartsElements = filterCarts.map(m => <CartBasket name={m.name} price={m.price} photo={m.link_photo} artist={users[m.id_artist-1]} tags={m.tags}/>)
-    let p = 0;
-    let price = filterCarts.map(m =>p=p+m.price);
+    let cartsElements = filterCarts.map(m => <CartBasket key={m.id} name={m.name} price={m.price} photo={m.link_photo} artist={users[m.userId-1]} tags={m.tags}/>)
+    // let p = 0;
+    // let price = filterCarts.map(m =>p=p+m.price);
+
+
+    /// новый счёт итоговой цены
+    let price = filterCarts.reduce((sum, cart) => sum + cart.price, 0);
+    // alert(result); // 15
 
     return (
         <div className={s.container}>
@@ -26,7 +31,7 @@ const CartsBasket = ({carts,users}:{carts:Array<iModel>,users:Array<iUser>}) => 
                     </div>
                     <div className={s.price}>
                         <span>Цена</span>
-                        <span className={s.p}>{p}руб</span>
+                        <span className={s.p}>{price}руб</span>
                     </div>
                 </div>
                 <div>

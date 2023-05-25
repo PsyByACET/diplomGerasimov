@@ -17,25 +17,32 @@ const Cart = ({cart}:{cart:iModel}) => {
     //     fetchUsers().catch(console.error)
     // }, []);
 
+    function changeCartDisplay(status:boolean) {
+        setModalActive(status);
+        document.body.style.overflow=status?"hidden":"auto";
+    }
 
     return (
         <div>
-            <div onClick={()=> openCart()}  className={s.cart}>
-                <img className={s.immg} src={cart.link_photo} alt=""/>
+            <div onClick={()=> changeCartDisplay(true)}  className={s.cart}>
+                <img className={s.immg} src={process.env.REACT_APP_API_URL + "photoModel/" + cart.link_photo} alt=""/>
                 <div className={s.name_and_price}>
                     <span className={s.name}>{cart.name}</span>
-                    <span className={s.name}>{cart.id_artist}</span>
+                    <span className={s.name}>{cart.userId}</span>
                     <span className={s.price}>{cart.price}руб</span>
+
                 </div>
             </div>
-            <ModalModel cart={cart} active={modalActive} setActive={setModalActive}></ModalModel>
+
+            {modalActive &&
+                <div className={s.modal} onClick={() => changeCartDisplay(false)}>
+                    <ModalModel cart={cart} active={modalActive} setActive={setModalActive}></ModalModel>
+                </div>
+            }
         </div>
     );
 
-    function openCart() {
-        setModalActive(true);
-        document.body.style.overflow="hidden"
-    }
+
 
 
 }

@@ -4,7 +4,7 @@ import React, {useState} from "react";
 
 const Filters = ({nameBlock,categories_list,nameText}:{nameBlock:string,categories_list:Array<string>,nameText:string}) => {
     const [open, setOpen] = useState(false);
-    let categoriesElements = categories_list.map(c => <DropdownItem category={c}/>)
+    let categoriesElements = categories_list.map(c => <DropdownItem key={c} category={c}/>)
 
     return (
         <div className={s.nameBlock}>

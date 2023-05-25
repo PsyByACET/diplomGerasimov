@@ -6,7 +6,7 @@ import Carts from "./Carts/Carts";
 import {iModel} from "../../models/Model";
 import {iUser} from "../../models/User";
 
-const Gallery = ({models, users}:{models:Array<iModel>, users:Array<iUser>}) => {
+const Gallery = ({models}:{models:Array<iModel>}) => {
 
     return (
         <div>
