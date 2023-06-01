@@ -4,16 +4,34 @@ import React, {useEffect, useState} from "react";
 import Filters from "./Filters/Filters";
 import Carts from "./Carts/Carts";
 import {iModel} from "../../models/Model";
-import {iUser} from "../../models/User";
+import {observer} from "mobx-react-lite";
+import {fetchModels} from "../../api/ModelApi";
 
-const Gallery = ({models}:{models:Array<iModel>}) => {
+
+const Gallery = observer(() => {
+
+    const [search, setSearch] = useState<string>("");
+    const [models, setModels] = useState<Array<iModel>>([]);
+
+    useEffect(() => {
+        fetchModels( "", "public").then(data => setModels(data))
+    }, [])
+
+    const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        fetchModels(search, "public").then(data => setModels(data))
+    }
+
+
 
     return (
         <div>
             <div className={s.container}>
                 <div className={s.search_block}>
                     <img src={find_icon} className={s.find_icon} alt=""/>
-                    <input name="name" className={s.input_search}  />
+                    <form action="" onSubmit={onSearchSubmit}>
+                        <input type="text" value={search} onChange={e => setSearch(e.target.value)} name="name" className={s.input_search}  />
+                    </form>
                 </div>
 
                 <div className={s.filters}>
@@ -22,14 +40,11 @@ const Gallery = ({models}:{models:Array<iModel>}) => {
                     <Filters nameText="Лицензия"  nameBlock="licence" categories_list={["CC0", "CC1", "SASI"]}></Filters>
 
                 </div>
-                    <Carts cartsProf={false} carts = {models}></Carts>
+                    <Carts cartsProf={false} models = {models} ></Carts>
             </div>
         </div>
     );
-}
+})
 
-function testCon() {
-    console.log("88")
-}
 
 export default Gallery

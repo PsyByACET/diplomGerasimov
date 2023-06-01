@@ -49,9 +49,11 @@
     margin-top: -60px;
 }
 .user_block img {
-    width: 50%;
+    width: 200px;
+    height: 200px;
     border-radius: 1000px;
     margin-top: -100px;
+    object-fit: cover;
 }
 .about{
     text-align: left!important;

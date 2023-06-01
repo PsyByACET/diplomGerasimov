@@ -2,11 +2,12 @@ export interface iUser {
     id: number;
     name: string;
     mail: string;
-    password: string;
     username: string,
     picture: string,
-    basket: Array<number>,
-    buy: Array<number>,
-    likes: number,
+    role:tUserRole,
     about: string,
+    likes: number,
 }
+
+export type tUserRole = "ADMIN" | "USER"
+

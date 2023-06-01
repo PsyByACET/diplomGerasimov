@@ -3,31 +3,29 @@ import {NavLink, useNavigate} from "react-router-dom";
 import mainLogo from "../../../public/main_logo.png";
 import React, {useEffect, useState} from "react";
 import {login, registration} from "../../../api/UserApi";
-import {useAuthStore} from "../../../store/UserStore";
+import {useUserStore} from "../../../store/UserStore";
 import {observer} from "mobx-react-lite";
 
 const Registration = observer(() => {
 
     let navigate = useNavigate()
 
-    const [mail, setMail] = useState("")
-    const [password, setPassword] = useState("")
-    const [name, setName] = useState("")
-    const [username, setUsername] = useState("")
+    const [mail, setMail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+    const [name, setName] = useState<string>("")
+    const [username, setUsername] = useState<string>("")
 
-    const authStore = useAuthStore();
+    const userStore = useUserStore();
 
     useEffect(() => {
-        if (authStore.user.mail) {
+        if (userStore._user.id) {
             navigate('/landing');
         }
-    }, [authStore.user]);
+    }, [userStore._user.id]);
 
     const signUp = async ()=> {
         try {
-            const response = await registration({mail,password, name, username})
-            console.log(response)
-            console.log(authStore)
+            await registration({mail,password, name, username})
             navigate('/landing');
         } catch (e:any) {
             alert(e.response.data.message)
@@ -60,9 +58,5 @@ const Registration = observer(() => {
             </div>
         </div>
     );
-
-    function testConsole () {
-        console.log('test')
-    }
 })
 export default Registration

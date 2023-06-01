@@ -1,3 +1,4 @@
+import {iUser} from "./User";
 
 
 export interface iModel {
@@ -11,8 +12,13 @@ export interface iModel {
     link_download: string;
     model3d: string;
     size: number;
-    userId: number;
+    artist: iUser;
     categoryId: number;
-    licenseId: number
+    license: iLicense
+}
+
+export interface iLicense {
+    id: number;
+    name: string;
 }
 

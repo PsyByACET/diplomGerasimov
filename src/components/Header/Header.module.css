@@ -41,9 +41,10 @@
     border: 1px solid #B5FBF9;
     text-align: center;
     color: #B5FBF9;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 20px;
 }
-
-
 
 .reg_btn {
     padding: 10px 24px;
@@ -52,4 +53,13 @@
     background: #B5FBF9;
     border-radius: 12px;
     color: #091010;
+
+}
+.auth_panel {
+    display: flex;
+}
+
+.auth_panel img{
+    width: 50px;
+    height: 50px;
 }

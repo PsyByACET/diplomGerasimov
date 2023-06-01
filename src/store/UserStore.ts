@@ -2,32 +2,30 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 import { iUser } from "../models/User";
 
-class AuthStore {
-    user: iUser = {} as iUser;
-    firstLoadCompleted: boolean = false; // Param for first page loading
-    isAuth: boolean = false;
+
+class UserStore {
+    _user: iUser = {} as iUser;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setUser(user: any) {
-        this.user = { ...user };
-    }
-    setIsAuth(bool: boolean) {
-        this.isAuth = bool
+    setUser(user: iUser) {
+        this._user = { ...user };
     }
 
-    setFirstLoadStatus(status: boolean) {
-        this.firstLoadCompleted = status;
+    get user() {
+        return this._user
     }
+
+
 }
 
-export const AuthInstance = new AuthStore();
-export const AuthContext = React.createContext(AuthInstance);
+export const UserInstance = new UserStore();
+export const UserContext = React.createContext(UserInstance);
 
-export const useAuthStore = () => {
-    return React.useContext(AuthContext);
+export const useUserStore = () => {
+    return React.useContext(UserContext);
 };
 
-export default AuthInstance;
+export default UserInstance;

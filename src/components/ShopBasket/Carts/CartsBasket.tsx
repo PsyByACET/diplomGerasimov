@@ -1,22 +1,45 @@
 
 import s from "./CartsBasket.module.css"
-import {iUser} from "../../../models/User";
 import {iModel} from "../../../models/Model";
 import CartBasket from "./Cart/CartBasket"
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {iBasketItems} from "../../../models/Basket_items";
+import {useUserStore} from "../../../store/UserStore";
+import {observer} from "mobx-react-lite";
+import {deleteBasketItem, getBasketItems} from "../../../api/ModelApi";
 
 
-const CartsBasket = ({carts,users}:{carts:Array<iModel>,users:Array<iUser>}) => {
-    let testMass = users[0].basket;
-    const filterCarts = carts.filter(m => testMass.includes(m.id));
-    let cartsElements = filterCarts.map(m => <CartBasket key={m.id} name={m.name} price={m.price} photo={m.link_photo} artist={users[m.userId-1]} tags={m.tags}/>)
-    // let p = 0;
-    // let price = filterCarts.map(m =>p=p+m.price);
+const CartsBasket = observer( () => {
+    const userStore = useUserStore();
+    const [basketItems, setBasketItems] = useState<Array<iBasketItems>>([]);
+
+    async function fetchModels() {
+        const newBasketItems = await getBasketItems(userStore.user.id);
+        setBasketItems(newBasketItems)
+    }
+    async function deleteModel(modelId:number) {
+        await deleteBasketItem(modelId)
+        fetchModels().catch(console.error)
+    }
+
+    useEffect(() => {
+        fetchModels().catch(console.error)
+    }, []);
 
 
-    /// новый счёт итоговой цены
-    let price = filterCarts.reduce((sum, cart) => sum + cart.price, 0);
-    // alert(result); // 15
+
+
+    let cartsElements = basketItems.map(m => <CartBasket
+        key={m.id}
+        model = {m.idmodel}
+        artist = {m.idmodel.artist}
+        id_basket_item = {m.id}
+        deleteModel = {deleteModel}
+    />)
+
+    let price = basketItems.reduce((sum, cart) => sum + cart.idmodel.price, 0);
+
+
 
     return (
         <div className={s.container}>
@@ -31,7 +54,7 @@ const CartsBasket = ({carts,users}:{carts:Array<iModel>,users:Array<iUser>}) => 
                     </div>
                     <div className={s.price}>
                         <span>Цена</span>
-                        <span className={s.p}>{price}руб</span>
+                        <span className={s.p}>{price} руб</span>
                     </div>
                 </div>
                 <div>
@@ -45,5 +68,5 @@ const CartsBasket = ({carts,users}:{carts:Array<iModel>,users:Array<iUser>}) => 
     function testConsole () {
         console.log('test')
     }
-}
+})
 export default CartsBasket

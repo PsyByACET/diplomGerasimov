@@ -1,6 +1,5 @@
 import {makeAutoObservable} from "mobx";
 import React from "react";
-import {iModel} from "../models/Model";
 
 interface iLicence {
     id: number,
@@ -8,39 +7,20 @@ interface iLicence {
 }
 
  class ModelStore {
-    _license: Array<iLicence> = [];
-    _selectedLicense: iLicence = {id: 0, name:""};
-    _models: Array<iModel> = [];
+    _licenses: Array<iLicence> = [];
 
     constructor() {
         makeAutoObservable(this)
     }
 
     setLicenses(licenses:Array<iLicence>) {
-        this._license = licenses
+        this._licenses = licenses
     }
-
-     setModels(models:Array<iModel>) {
-         this._models = models
-     }
-
-
-     setSelectedLicense(license:iLicence) {
-         this._selectedLicense = license
-
-     }
-
-
 
     get licenses() {
-        return this._license
+        return this._licenses
     }
-     get models() {
-         return this._models
-     }
-     get SelectedLicense() {
-         return this._selectedLicense
-     }
+
 
 }
 export const ModelInstance = new ModelStore();

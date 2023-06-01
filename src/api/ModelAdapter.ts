@@ -1,8 +1,9 @@
 import {iModel} from "../models/Model";
+import {iBasketItems} from "../models/Basket_items";
 
 
 export class ModelAdapter {
-    static transform(modelItem: any): iModel {
+    static transformModelItem(modelItem: any): iModel {
         return {
             id: modelItem.id,
             name: modelItem.name,
@@ -14,14 +15,26 @@ export class ModelAdapter {
             link_download: modelItem.link_download,
             model3d: modelItem.model3d,
             size: modelItem.size,
-            userId: modelItem.userId,
+            artist: modelItem.artist,
             categoryId: modelItem.categoryId,
-            licenseId:  modelItem.licenseId
+            license:  modelItem.license
         };
     }
-    static transformArray(data: any): iModel[] {
-        return data.data.map((item: any) => this.transform(item))
+    static transformModelArray(data: any): iModel[] {
+        return data.map((item: any) => this.transformModelItem(item))
     }
+    static transformBasketItem(userItem: any): iBasketItems {
+        console.log(userItem)
+        return {
+            id: userItem.id,
+            basketId: userItem.basketId,
+            idmodel: userItem.idmodel,
+        };
+    }
+    static transformBasketArray(data: any): iBasketItems[] {
+        return data.map((item: any) => this.transformBasketItem(item))
+    }
+
 
 
 }

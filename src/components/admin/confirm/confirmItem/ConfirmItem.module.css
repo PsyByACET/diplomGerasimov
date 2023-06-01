@@ -19,11 +19,6 @@
     justify-content: space-between;
 }
 
-.artist_and_tags {
-
-
-}
-
 .artist {
     display: flex;
     align-items: center;
@@ -86,4 +81,14 @@
 .price {
     color: #61dafb;
     font-size: 16px;
+}
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.60);
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    overflow: auto;
 }

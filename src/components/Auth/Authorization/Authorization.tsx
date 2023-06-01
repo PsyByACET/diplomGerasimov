@@ -4,27 +4,21 @@ import mainLogo from "../../../public/main_logo.png";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom"
 import {login, registration} from "../../../api/UserApi";
-import {useAuthStore} from "../../../store/UserStore";
+import {useUserStore} from "../../../store/UserStore";
 
 
 
 const Authorization = () => {
-    let navigate = useNavigate()
-    const [mail, setMail] = useState("")
-    const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+    const userStore = useUserStore();
 
-    const authStore = useAuthStore();
+    const [mail, setMail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
 
-    // const [name, setName] = useState("")
-    // const [username, setUsername] = useState("")
-    
     const signIn = async ()=> {
         try {
-            const response = await login({mail, password})
-            authStore.setUser(response)
-            authStore.setIsAuth(true)
-            console.log(response)
-
+            const user = await login({mail, password})
+            userStore.setUser(user)
             navigate('/landing')
         } catch (e:any) {
             alert(e.response.data.message)
@@ -32,10 +26,10 @@ const Authorization = () => {
     }
 
     useEffect(() => {
-        if (authStore.user.mail) {
+        if (userStore._user.id) {
             navigate('/landing')
         }
-    }, [authStore.user]);
+    }, [userStore._user.id]);
     
     return (
         <div>
@@ -48,9 +42,6 @@ const Authorization = () => {
                 <div className={s.authorization_block}>
                     <input value={mail} onChange={e=> setMail(e.target.value)} name='email' type='text' placeholder='mail'/>
                     <input value={password} onChange={e=> setPassword(e.target.value)} name='password' type='password' placeholder='pass'/>
-                    {/*<input value={name} onChange={e=> setName(e.target.value)} name='name' type='text' placeholder='name'/>*/}
-                    {/*<input value={username} onChange={e=> setUsername(e.target.value)} name='username' type='text' placeholder='username'/>*/}
-
                     <div className={s.btns}>
                         <button onClick={()=> signIn()} type='submit'>Войти</button>
                         <div className={s.recover_block}>
@@ -64,8 +55,5 @@ const Authorization = () => {
         </div>
     );
 
-    function testConsole () {
-        console.log('test')
-    }
 }
 export default Authorization

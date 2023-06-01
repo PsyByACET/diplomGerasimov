@@ -1,21 +1,32 @@
 import {$authHost, $host} from "./index";
 import jwt_decode from "jwt-decode"
+import {iUser} from "../models/User";
+import {UserAdapter} from "./UserAdapter";
 
-export const registration = async ({mail, password, name, username}:{mail:string, password:string, name:string, username:string}) => {
+export const registration = async ({mail, password, name, username}:{mail:string, password:string, name:string, username:string}):Promise<iUser>  => {
     const { data } = await $host.post('api/registration', {mail, password, role:'ADMIN', name, username})
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }
-// export const login = async ({mail, password, name, username}:{mail:string, password:string, name:string, username:string}) => {
-//     const response = await $host.post('api/login', {mail, password, name, username})
-// }
-export const login = async ({mail, password}:{mail:string, password:string}) => {
+
+export const login = async ({mail, password}:{mail:string, password:string}):Promise<iUser>  => {
     const { data } = await $host.post("api/login", { mail, password });
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }
-export const check = async () => {
-    const { data } = await $authHost.post("api/registration");
+
+export const check = async ():Promise<iUser> => {
+    const { data } = await $authHost.get("api/auth")
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
+}
+
+export async function getAllUsers (): Promise<iUser[]>  {
+    const { data } = await $host.get('api/users')
+    return UserAdapter.transformArray(data);
+}
+
+export async function getOneUser(id:string): Promise<iUser> {
+    const { data } = await $host.get("api/user/"+id)
+    return UserAdapter.transform(data);
 }

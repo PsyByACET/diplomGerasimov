@@ -1,22 +1,24 @@
 import {$authHost, $host} from "./index";
-import jwt_decode from "jwt-decode"
-import {iModel} from "../models/Model";
+import {iLicense, iModel} from "../models/Model";
+import {ModelAdapter} from "./ModelAdapter";
+import {iBasketItems} from "../models/Basket_items";
 
-export const registration = async ({mail, password, name, username}:{mail:string, password:string, name:string, username:string}) => {
-    const { data } = await $host.post('api/registration', {mail, password, role:'ADMIN', name, username})
-    localStorage.setItem('token', data.token)
-    return jwt_decode(data.token)
-}
-// export const login = async ({mail, password, name, username}:{mail:string, password:string, name:string, username:string}) => {
-//     const response = await $host.post('api/login', {mail, password, name, username})
-// }
-export const fetchLicense = async () => {
+
+export async function fetchLicenses(): Promise<iLicense[]> {
     const { data } = await $host.get('api/license/')
     return data
 }
-export const fetchModels = async () => {
-    const { data } = await $host.get('api/model/')
-    return data
+
+export async function fetchModels(search?:string, status?:string): Promise<iModel[]> {
+    const { data } = await $host.get('api/model/',{
+        params: { searchField:search, status: status }
+    })
+    return ModelAdapter.transformModelArray(data);
+}
+
+export async function fetchUserModels(userId:string): Promise<iModel[]> {
+    const { data } = await $host.get('api/user_models/'+userId)
+    return ModelAdapter.transformModelArray(data);
 }
 
 export const createModel = async (model:any) => {
@@ -31,13 +33,29 @@ export const createModel = async (model:any) => {
             formData.append(key, model[key]);
         }
     }
-    console.log(model)
-    const {data} = await $host.post('api/model', formData)
+    const {data} = await $authHost.post('api/model', formData)
     return data
 }
 
-export const check = async () => {
-    const { data } = await $authHost.post("api/registration");
-    localStorage.setItem('token', data.token)
-    return jwt_decode(data.token)
+export const createBasketItem = async (basket_item:any) => {
+    const formData = new FormData();
+
+    for (let i in basket_item) {
+        formData.append(i, basket_item[i]);
+    }
+    const {data} = await $host.post('api/basket_item', formData)
+    return data
 }
+
+export async function getBasketItems(id:number): Promise<iBasketItems[]> {
+    const { data } = await $host.get("api/basket_items/"+id)
+    return ModelAdapter.transformBasketArray(data);
+}
+
+export async function deleteBasketItem(id:number): Promise<iBasketItems[]> {
+    const { data } = await $host.delete("api/basket_items/"+id)
+    return data
+}
+
+
+
