@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {iModel} from "../../../models/Model";
-import {deleteBasketItem, fetchModels, updateModel} from "../../../api/ModelApi";
-import {observer} from "mobx-react-lite";
-import CartBasket from "../../ShopBasket/Carts/Cart/CartBasket";
-import ConfirmItem from "./confirmItem/ConfirmItem";
-import s from "../../ShopBasket/Carts/CartsBasket.module.css";
+import {fetchModels, updateModel} from "../../../api/ModelApi";
+import ConfirmItem from "../../admin/confirm/confirmItem/ConfirmItem";
 
 
-const Confirm = observer(() => {
+const CancelCarts = () => {
 
     const [models, setModels] = useState<Array<iModel>>([]);
 
@@ -33,12 +30,10 @@ const Confirm = observer(() => {
         updateM = {updateM}
     />)
 
-
     return (
-        <div className={s.carts}>
-            {cartsElements}
-        </div>
+        <div>
 
+        </div>
     );
-})
-export default Confirm
+}
+export default CancelCarts

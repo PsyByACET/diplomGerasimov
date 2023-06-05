@@ -11,7 +11,7 @@ import AddCart from "./components/ProileUser/AddCart/AddCart";
 import TestDow from "./components/testDow";
 import {useUserStore} from "./store/UserStore";
 import {check} from "./api/UserApi";
-import {fetchLicenses} from "./api/ModelApi";
+import {fetchCategories, fetchFormats, fetchLicenses} from "./api/ModelApi";
 import {useModelStore} from "./store/ModelStore";
 import ProfileUser from "./components/ProileUser/ProfileUser";
 import ShopBasket from "./components/ShopBasket/ShopBasket";
@@ -43,6 +43,8 @@ const App = () => {
 
     useEffect(()=> {
         fetchLicenses().then(data => modelStore.setLicenses(data))
+        fetchFormats().then(data => modelStore.setFormats(data))
+        fetchCategories().then(data => modelStore.setCategories(data))
     },[])
 
   return (

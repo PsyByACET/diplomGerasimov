@@ -4,16 +4,19 @@ import {iUser} from "../../../../models/User";
 import s from "./ConfirmItem.module.css"
 import ModalModel from "../../../ModalModel/ModalModel";
 import {useState} from "react";
+import {updateUser} from "../../../../api/UserApi";
+import {updateModel} from "../../../../api/ModelApi";
 
 
-const ConfirmItem = observer(({model,artist}:{model:iModel,artist:iUser}) => {
+const ConfirmItem = observer(({model,artist,updateM}:{model:iModel,artist:iUser,updateM:(model:iModel, st:string)=>Promise<void>}) => {
 
-    const tagsElement = model.tags.map(t => <div className={s.tag}>{t}</div>);
+    // const tagsElement = model.tags.map(t => <div className={s.tag}>{t}</div>);
 
     const [modalActive, setModalActive] = useState(false)
 
+
+
     function changeCartDisplay(status:boolean) {
-        // console.log(modalActive)
         console.log(status)
         setModalActive(status);
         document.body.style.overflow=status?"hidden":"auto";
@@ -31,8 +34,10 @@ const ConfirmItem = observer(({model,artist}:{model:iModel,artist:iUser}) => {
                                 <span>{artist.username}</span>
                             </div>
                         </div>
-                        <div className={s.tags}>
-                            {tagsElement}
+                        <div onClick={e => e.stopPropagation()} className={s.tags}>
+                            {/*{tagsElement}*/}
+                            <button onClick={()=> updateM(model, "public")}>Добавить</button>
+                            <button onClick={()=> updateM(model, "cancel")}>Отменить</button>
                         </div>
                     </div>
                     <div className={s.name_and_price}>

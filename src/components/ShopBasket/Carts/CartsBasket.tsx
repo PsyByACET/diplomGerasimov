@@ -26,9 +26,6 @@ const CartsBasket = observer( () => {
         fetchModels().catch(console.error)
     }, []);
 
-
-
-
     let cartsElements = basketItems.map(m => <CartBasket
         key={m.id}
         model = {m.idmodel}
@@ -62,7 +59,6 @@ const CartsBasket = observer( () => {
                 </div>
             </div>
         </div>
-
     );
 
     function testConsole () {

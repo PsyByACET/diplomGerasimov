@@ -59,7 +59,7 @@ const ModalModel = observer( ({cart}:{cart:iModel}) => {
             </div>
 
             <div className={s.payment}>
-                {cart.price === 0 ?(
+                {cart.price === 0 || cart.artist.id === userStore.user.id ?(
                     <div className={s.cart_price}>
                         <span>Бесплатно</span>
                         <a href={pathLink}><button type='submit'>Скачать</button></a>

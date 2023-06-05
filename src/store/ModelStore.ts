@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import React from "react";
+import {iCategory, iFormat} from "../models/Model";
 
 interface iLicence {
     id: number,
@@ -8,6 +9,8 @@ interface iLicence {
 
  class ModelStore {
     _licenses: Array<iLicence> = [];
+    _categories: Array<iCategory> = [];
+    _formats: Array<iFormat> = [];
 
     constructor() {
         makeAutoObservable(this)
@@ -20,6 +23,22 @@ interface iLicence {
     get licenses() {
         return this._licenses
     }
+
+     setCategories(categories:Array<iCategory>) {
+         this._categories = categories
+     }
+
+     get categories() {
+         return this._categories
+     }
+
+     setFormats(formats:Array<iFormat>) {
+         this._formats = formats
+     }
+
+     get formats() {
+         return this._formats
+     }
 
 
 }

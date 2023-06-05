@@ -3,26 +3,53 @@ import find_icon from "../../public/find.png";
 import React, {useEffect, useState} from "react";
 import Filters from "./Filters/Filters";
 import Carts from "./Carts/Carts";
-import {iModel} from "../../models/Model";
+import {iLicense, iModel} from "../../models/Model";
 import {observer} from "mobx-react-lite";
-import {fetchModels} from "../../api/ModelApi";
+import {fetchLicenses, fetchModels} from "../../api/ModelApi";
+import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
+import {useModelStore} from "../../store/ModelStore";
 
 
 const Gallery = observer(() => {
 
     const [search, setSearch] = useState<string>("");
     const [models, setModels] = useState<Array<iModel>>([]);
+    const [deleteFilter, setDeleteFilter] = useState(false);
+    const searchParams = new URLSearchParams(window.location.search);
+
+
+
+    const location = useLocation();
+    const modelStore = useModelStore()
+    let navigate = useNavigate()
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log(location.search)
+
 
     useEffect(() => {
-        fetchModels( "", "public").then(data => setModels(data))
-    }, [])
+        const licence = searchParams.getAll('licence');
+        const category = searchParams.getAll('category');
+        const format = searchParams.get('format');
+        fetchModels({
+            search: search,
+            status: "public",
+            categoryId:category||undefined,
+            licenseId:licence||undefined,
+            formatId:format||undefined
+        }).then(data => setModels(data))
+
+    }, [location.search])
+
+
+    const filterDelete = () => {
+        navigate("/gallery")
+    }
 
     const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        fetchModels(search, "public").then(data => setModels(data))
+
+        fetchModels({ search: search, status: "public"}).then(data => setModels(data))
     }
-
-
 
     return (
         <div>
@@ -35,9 +62,14 @@ const Gallery = observer(() => {
                 </div>
 
                 <div className={s.filters}>
-                    <Filters nameText="Категория" nameBlock="category" categories_list={["Живетные", "Машины", "Люди"]}></Filters>
-                    <Filters nameText="Формат"  nameBlock="format" categories_list={["3dx", "blend", "hz"]}></Filters>
-                    <Filters nameText="Лицензия"  nameBlock="licence" categories_list={["CC0", "CC1", "SASI"]}></Filters>
+                    <Filters nameText="Категория" nameBlock="category" categories_list={modelStore.categories}></Filters>
+                    <Filters nameText="Формат"  nameBlock="format" categories_list={modelStore.formats}></Filters>
+                    <Filters nameText="Лицензия"  nameBlock="licence" categories_list={modelStore.licenses}></Filters>
+                    {location.search?(
+                            <button onClick={filterDelete} > очистить</button>
+                        ):
+                            <></>
+                    }
 
                 </div>
                     <Carts cartsProf={false} models = {models} ></Carts>

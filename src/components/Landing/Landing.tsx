@@ -1,7 +1,6 @@
 
 const Landing = () => {
 
-
     return (
         <div>
 

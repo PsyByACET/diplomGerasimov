@@ -16,6 +16,8 @@ export class ModelAdapter {
             model3d: modelItem.model3d,
             size: modelItem.size,
             artist: modelItem.artist,
+            status: modelItem.status,
+            status_des: modelItem.status_des,
             categoryId: modelItem.categoryId,
             license:  modelItem.license
         };
