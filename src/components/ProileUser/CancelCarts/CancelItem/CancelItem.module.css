@@ -1,7 +1,10 @@
 .immg {
-    width: 25vw;
-    height: 13vw;
+    height: 100%;
+    width: 26%;
     border-radius: 8px 0px 0px 8px;
+}
+.container {
+    margin: auto 6vw;
 }
 
 .cart {
@@ -9,35 +12,39 @@
     display: flex;
     border-radius: 8px;
     margin-bottom: 20px;
+    height: 14vw;
 
+}
+.auth_btn {
+    padding: 10px 24px;
+    text-decoration: none;
+    border-radius: 12px;
+    border: 1px solid #B5FBF9;
+    text-align: center;
+    color: #B5FBF9;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .content {
-    width: 61%;
+    width: 74%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.artist_and_tags {
-
-
-}
-
-.artist {
+.des {
     display: flex;
-    align-items: center;
+    text-align: left;
     background-color: #091010;
-    height: 70px;
-    width: 60%;
+    height: 7vw;
+    width: 100%;
     min-width: 300px;
-    border-radius: 100px;
+    border-radius: 16px;
     margin: 20px 30px;
     align-items: center;
 
-}
-.artist img {
-    object-fit: cover;
 }
 .artist_and_delete {
     display: flex;
@@ -52,20 +59,28 @@
     height: 40px;
 }
 
-.artist img {
+.des img {
     width: 70px;
     height: 70px;
     border-radius: 100px    ;
 }
 
-.artist span {
+.des textarea {
     margin-left: 20px;
-    padding-right: 110px;
+    background: rgba(0, 0, 0, 0);
+    width: 100%;
+    min-height: 1px;
+    padding: 0px;
+    font-size: 16px;
+    color: white;
+    border: none;
 }
 
 .tags {
     display: flex;
     margin-left: 30px;
+    float: right;
+    margin-right: 30px;
 }
 .tag {
     background-color: #091010;
@@ -83,10 +98,20 @@
 }
 
 .name {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .price {
     color: #61dafb;
-    font-size: 16px;
+    font-size: 20px;
+}
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.60);
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    overflow: auto;
 }

@@ -52,6 +52,13 @@
     margin-right: 10px;
 
 }
+.modelName {
+    font-size: 32px;
+}
+.artistName {
+    text-decoration: none;
+    color: white;
+}
 .cart_price {
     background-color: #212f30;
     margin-bottom: 20px;

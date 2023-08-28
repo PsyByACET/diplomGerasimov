@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {iModel} from "../../../models/Model";
 import {deleteBasketItem, fetchModels, updateModel} from "../../../api/ModelApi";
 import {observer} from "mobx-react-lite";
-import CartBasket from "../../ShopBasket/Carts/Cart/CartBasket";
 import ConfirmItem from "./confirmItem/ConfirmItem";
 import s from "../../ShopBasket/Carts/CartsBasket.module.css";
 
@@ -11,14 +10,15 @@ const Confirm = observer(() => {
 
     const [models, setModels] = useState<Array<iModel>>([]);
 
-    async function updateM(model:iModel, st:string) {
+    async function updateM(model:iModel, st:string, des:string) {
         await updateModel({
             id: model.id,
             status: st,
-            status_des: model.status_des
+            status_des: des
         })
         fetchModels({status: "consideration"}).then(data => setModels(data))
     }
+
 
 
 
@@ -35,8 +35,12 @@ const Confirm = observer(() => {
 
 
     return (
-        <div className={s.carts}>
-            {cartsElements}
+
+        <div>
+            <h1>Подтверждение публицации</h1>
+            <div className={s.carts}>
+                {cartsElements}
+            </div>
         </div>
 
     );

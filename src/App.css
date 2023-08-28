@@ -14,6 +14,12 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+button:hover {
+
+  background-color: #61dafb;
+  box-shadow: white;
+  transition: 0.4s;
+}
 
 .App-header {
   background-color: #282c34;

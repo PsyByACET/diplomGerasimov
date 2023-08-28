@@ -4,6 +4,7 @@
     grid-template-columns: 8fr 3fr;
     grid-gap: 20px;
 }
+
 .payment {
     background-color: #212f30;
     border-radius: 12px;

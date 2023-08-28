@@ -1,0 +1,39 @@
+.main {
+    height: 91vh;
+    background-image: url("../../public/bg1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover
+}
+.main img {
+    height: 75px;
+}
+.main span {
+    font-size: 140px;
+    font-weight: 800;
+    color: #B5FBF9;
+}
+.logoName {
+    display: flex;
+    margin-left: 20vw;
+    padding-top: 33vh;
+    align-items: center;
+}
+.logoName img{
+    margin-right: 40px;
+}
+.second {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+
+}
+.second div {
+    display: flex;
+    align-items: flex-end;
+}
+.second img {
+
+}

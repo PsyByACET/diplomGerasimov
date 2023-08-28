@@ -18,15 +18,15 @@ export class ModelAdapter {
             artist: modelItem.artist,
             status: modelItem.status,
             status_des: modelItem.status_des,
-            categoryId: modelItem.categoryId,
-            license:  modelItem.license
+            license:  modelItem.license,
+            category: modelItem.category,
+            model_formats: modelItem.model_formats
         };
     }
     static transformModelArray(data: any): iModel[] {
         return data.map((item: any) => this.transformModelItem(item))
     }
     static transformBasketItem(userItem: any): iBasketItems {
-        console.log(userItem)
         return {
             id: userItem.id,
             basketId: userItem.basketId,

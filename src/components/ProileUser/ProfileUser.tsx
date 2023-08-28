@@ -26,12 +26,31 @@ const ProfileUser = observer( () => {
     const [about, setAbout] = useState<string>();
     const [te, setTe] = useState<boolean>(false);
 
+    const [filePhoto, setFilePhoto] = useState<Array<File>>([])
+
+    const selectFile = (e:any) => {
+        setFilePhoto(e.target.files[0])
+    }
+
     const updateU = async (bool:boolean) => {
-        await updateUser({
-            id: userToShow.id,
-            username: username,
-            about: about
-        })
+        if (filePhoto.length === 0) {
+
+            await updateUser({
+                id: userToShow.id,
+                username: username,
+                picture: filePhoto,
+                about: about
+            })
+        } else {
+
+            await updateUser({
+                id: userToShow.id,
+                username: username,
+                picture: filePhoto,
+                about: about
+            })
+        }
+
         setTe(bool)
         if (id) {
             fetchUser(id).catch(console.error)
@@ -52,7 +71,7 @@ const ProfileUser = observer( () => {
         setAbout(newUser.about)
     }
     async function fetchModelsByUser(userId:string) {
-        const models = await fetchUserModels(userId);
+        const models = await fetchUserModels({userId: userId, status: "public",});
         setModelsUserToShow(models)
     }
 
@@ -66,35 +85,46 @@ const ProfileUser = observer( () => {
         }
 
     }, []);
-
+    let path = process.env.REACT_APP_API_URL + "photoUser/"
 
     return (
         <div>
             <div className={s.bg_profile}></div>
             <div className={s.content}>
                 <div className={s.cars_filters}>
-                    <div className={s.search_block}>
-                        <img src={find_icon} className={s.find_icon} alt=""/>
-                        <input name="name" className={s.input_search}  />
-                    </div>
                     <Carts cartsProf={true} models = {modelsUserToShow} ></Carts>
                 </div>
                 <div className={s.profile_info}>
                     <div className={s.user_block}>
-                        <img src={userToShow.picture} alt=""/>
-                        {te? (
-                            <input value={username} onChange={e => setUsername(e.target.value)} name='name' type='text' placeholder='Название'/>
-                        ):(
-                            <div>{userToShow.username}</div>
-                        )}
+                        <div className={s.imgName}>
+                            {te? (
+                                <div>
+                                    <label htmlFor="imageInput" className={s.customFileUpload}>
+                                        <div className={s.dow} >
+                                            Загрузить фото
+                                        </div>
+                                    </label>
+                                    <input onChange={selectFile} id="imageInput" accept="image/png, image/jpeg, imgage/jpg" name='price' type='file' placeholder='Цена'/>
+                                </div>
+                            ):(
+                                <img src={path + userToShow.picture} alt=""/>
+                            )}
+
+                            <div className={s.username}>
+                                {te? (
+                                    <input maxLength={24} value={username} onChange={e => setUsername(e.target.value)} name='name' type='text' placeholder='Название'/>
+                                ):(
+                                    <div>{userToShow.username}</div>
+                                )}
+                            </div>
+                        </div>
                         <div className={s.about}>
                             <h2>Обо мне</h2>
                             {te? (
-                                <input value={about} onChange={e => setAbout(e.target.value)} name='name' type='text' placeholder='Название'/>
+                                <textarea value={about} onChange={e => setAbout(e.target.value)} name='name'     placeholder='Название'/>
                             ):(
                                 <span>{userToShow.about}</span>
                             )}
-
                         </div>
                     </div>
                     {userStore.user.id == userToShow.id &&(

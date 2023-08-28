@@ -11,7 +11,6 @@ export const Model3d = observer( ({cart}:{cart:iModel}) => {
 
     let path = "http://localhost:5001/3dModel/" + cart.model3d
     useEffect(() => {
-        console.log(path)
     },[path])
     const modelRef = useRef<Mesh>(null!)
     const gltf = useGLTF(path); // Choose model to render

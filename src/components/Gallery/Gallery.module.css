@@ -1,5 +1,16 @@
 .container {
+    margin: 0px 40px;
+}
+а.container {
     margin: 5px 40px;
+}
+.filter_button {
+    height: 40px;
+    width: 140px;
+    margin-left: 40px;
+}
+.filter_block {
+    display: flex;
 }
 @media screen and (max-width: 600px) {
     .container {
@@ -29,10 +40,15 @@
     border: none;
 
 }
+.sort {
+ cursor: pointer;
+}
 .filters {
     display: flex;
     width: 700px;
     justify-content: space-between;
+    margin: 20px 0px;
+    text-align: left;
 }
 .find_icon{
     width: 24px;

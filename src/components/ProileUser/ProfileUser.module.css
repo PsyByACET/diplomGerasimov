@@ -7,6 +7,7 @@
     display: grid;
     grid-template-columns: 9fr 3fr;
     grid-gap: 20px;
+    margin: 20px;
 }
 
 .search_block{
@@ -47,14 +48,68 @@
     width: 100%;
     border-radius: 12px;
     margin-top: -60px;
+    text-align: center;
 }
 .user_block img {
     width: 200px;
     height: 200px;
     border-radius: 1000px;
+    margin: 0 auto;
     margin-top: -100px;
     object-fit: cover;
 }
+.dow {
+    width: 200px;
+    height: 200px;
+    border-radius: 1000px;
+    margin: 0 auto;
+    margin-top: -100px;
+    background-color: #3d4e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dow span {
+    color: red;
+}
 .about{
     text-align: left!important;
+    padding: 20px;
+}
+.imgName {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    font-size: 14px;
+    background-color: #3d4e50;
+    padding-left: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border: none;
+    outline:none;
+}
+textarea {
+    resize: none;
+    padding: 20px;
+}
+.username {
+    margin-top: 10px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000000s 0s, color 600000000s 0s;
+}
+.about textarea {
+    font-size: 14px;
+    width: 80%;
+    height: 100px;
+    background-color: #3d4e50;
+    padding-left: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border: none;
+    outline: none;
 }

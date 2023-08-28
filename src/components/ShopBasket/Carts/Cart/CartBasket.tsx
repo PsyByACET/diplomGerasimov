@@ -19,11 +19,11 @@ const CartBasket = observer( (
                 <div className={s.artist_and_tags}>
                     <div className={s.artist_and_delete}>
                         <div className={s.artist}>
-                            <img src={artist.picture} alt=""/>
+                            <img src={process.env.REACT_APP_API_URL + "photoUser/" + artist.picture} alt=""/>
                             <span>{artist.username}</span>
                         </div>
                         <div className={s.delete}>
-                            <button onClick={()=> deleteModel(id_basket_item)}>del{id_basket_item}</button>
+                            <button onClick={()=> deleteModel(id_basket_item)}>ㅤXㅤ</button>
                         </div>
                     </div>
                     <div className={s.tags}>

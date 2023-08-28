@@ -15,8 +15,25 @@ export interface iModel {
     status: string;
     status_des: string,
     artist: iUser;
-    categoryId: number;
+    category: iCategory;
     license: iLicense
+    model_formats: iModelFormats[]
+}
+
+export interface iModelFormats {
+    id: number,
+    modelId: number,
+    format_models: iFormatModel[]
+}
+export interface iFormatModel {
+    id: number,
+    modelFormatId: number,
+    formatId: number,
+    idformat: IIdFormat
+}
+export interface IIdFormat {
+    id: number
+    name: string
 }
 
 export interface iLicense {

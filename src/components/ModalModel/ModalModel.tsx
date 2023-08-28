@@ -19,6 +19,7 @@ const ModalModel = observer( ({cart}:{cart:iModel}) => {
         setBasketItems(newBasketItems)
     }
 
+
     useEffect(() => {
         fetchModels().catch(console.error)
     }, []);
@@ -31,8 +32,14 @@ const ModalModel = observer( ({cart}:{cart:iModel}) => {
         fetchModels().catch(console.error)
     }
 
+    const [te, setTe] = useState<boolean>(false);
+    const ttClick = (bool:boolean) => {
+        setTe(bool)
+    }
+
     let pathLink = "http://localhost:5001/rar/" + cart.link_download
     let path = "/user/" + cart.artist.id;
+    let pathPhotoUser = process.env.REACT_APP_API_URL + "photoUser/" + cart.artist.picture
 
 
 
@@ -40,13 +47,25 @@ const ModalModel = observer( ({cart}:{cart:iModel}) => {
         <div className={s.modal_content} onClick={e => e.stopPropagation()} >
             <div className={s.img_dis_comm}>
                 <div className={s.photo}>
-                    <CanvasModel cart={cart} />
+                    {te? (
+                        <div>
+                            <iframe width="100%" height="500px" src="https://www.youtube.com/embed/jQWLoYpHY5Q"
+                                    title="YouTube video player" frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen>
+
+                            </iframe>
+                        </div>
+                    ):(
+                        <CanvasModel cart={cart} />
+                    )}
+
                 </div>
                 <div className={s.name_model}>
-                    <span>{cart.name}</span>
+                    <span className={s.modelName}>{cart.name}</span>
                     <NavLink to={path} className={s.artist}>
-                        <img src={cart.artist.picture} alt=""/>
-                        <span>{cart.artist.username}</span>
+                        <img src={pathPhotoUser} alt=""/>
+                        <span className={s.artistName}>{cart.artist.username}</span>
                     </NavLink>
                 </div>
 
@@ -76,8 +95,9 @@ const ModalModel = observer( ({cart}:{cart:iModel}) => {
                 }
 
                 <div className={s.cart_info}>
-                    <div className={s.rate}>
-                        wip
+                    <div className={s.license}>
+                        <span className={s.zag}>Категория</span>
+                        <span>{cart.category.name}</span>
                     </div>
                     <div className={s.license}>
                         <span className={s.zag}>Лицензия</span>
@@ -86,11 +106,15 @@ const ModalModel = observer( ({cart}:{cart:iModel}) => {
                     <div className={s.formats}>
                         <span className={s.zag}>Форматы</span>
                         <br/>
-                        <span>ds</span>
+                        {cart.model_formats[0].format_models.map(f => <span>{f.idformat.name+" "}</span>)}
                     </div>
                 </div>
                 <div className={s.btn_swap}>
-                    Перейти к видеогайду
+                    {te? (
+                        <button onClick={()=> ttClick(false)}>Модель</button>
+                    ):(
+                        <button onClick={()=> ttClick(true)}>Видеоурок</button>
+                    )}
 
                 </div>
             </div>

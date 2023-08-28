@@ -5,7 +5,7 @@ import {UserAdapter} from "./UserAdapter";
 import {iModel} from "../models/Model";
 
 export const registration = async ({mail, password, name, username}:{mail:string, password:string, name:string, username:string}):Promise<iUser>  => {
-    const { data } = await $host.post('api/registration', {mail, password, role:'ADMIN', name, username})
+    const { data } = await $host.post('api/registration', {mail, password, role:'USER', name, username})
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }

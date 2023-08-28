@@ -2,6 +2,8 @@ import {$authHost, $host} from "./index";
 import {iCategory, iFormat, iLicense, iModel} from "../models/Model";
 import {ModelAdapter} from "./ModelAdapter";
 import {iBasketItems} from "../models/Basket_items";
+import {iUser} from "../models/User";
+import {UserAdapter} from "./UserAdapter";
 
 
 export async function fetchLicenses(): Promise<iLicense[]> {
@@ -19,14 +21,32 @@ export async function fetchFormats(): Promise<iFormat[]> {
     return data
 }
 
-export async function fetchModels({search, status,categoryId,licenseId,formatId }:{search?:string, status?:string, categoryId?:string[],licenseId?:string[],formatId?:string }): Promise<iModel[]> {
+export async function fetchModels({search, status,categoryId,licenseId,formatId, sort }:{search?:string, status?:string, categoryId?:string[],licenseId?:string[],formatId?:string[], sort?:string }): Promise<iModel[]> {
     const { data } = await $host.get('api/model/',{
-        params: { searchField:search, status: status, categoryId:categoryId, licenseId:licenseId, formatId:formatId }
+        params: { searchField:search, status: status, categoryId:categoryId, licenseId:licenseId, formatId:formatId, sort:sort }
     })
     return ModelAdapter.transformModelArray(data);
 }
+export async function fetchOneModel(id:string): Promise<iModel> {
+    const { data } = await $host.get("api/model/"+id)
+    return data;
+}
 
 export async function updateModel(model:any): Promise<iModel> {
+    const formData = new FormData();
+    for (let key in model) {
+        if (key === "tags") {
+            for (let i = 0; i < model.tags.length; i++) {
+                formData.append(key, model.tags[i]);
+            }
+        } else {
+            formData.append(key, model[key]);
+        }
+    }
+    const { data } = await $host.put("api/modelst/", formData)
+    return data
+}
+export async function updateModelFull(model:any): Promise<iModel> {
     const formData = new FormData();
     for (let key in model) {
         if (key === "tags") {
@@ -41,8 +61,11 @@ export async function updateModel(model:any): Promise<iModel> {
     return data
 }
 
-export async function fetchUserModels(userId:string): Promise<iModel[]> {
-    const { data } = await $host.get('api/user_models/'+userId)
+export async function fetchUserModels({search, status,categoryId,licenseId,formatId,userId }:{search?:string, status?:string, categoryId?:string[],licenseId?:string[],formatId?:string,userId:string }): Promise<iModel[]> {
+    const { data } = await $host.get('api/user_models/'+userId, {
+        params: { searchField:search, status: status, categoryId:categoryId, licenseId:licenseId, formatId:formatId }
+    })
+
     return ModelAdapter.transformModelArray(data);
 }
 
@@ -54,9 +77,14 @@ export const createModel = async (model:any) => {
             for (let i = 0; i < model.tags.length; i++) {
                 formData.append(key, model.tags[i]);
             }
+        } else if (key === "formatArr") {
+            for (let i = 0; i < model.formatArr.length; i++) {
+                formData.append(key, model.formatArr[i]);
+            }
         } else {
             formData.append(key, model[key]);
         }
+
     }
     const {data} = await $authHost.post('api/model', formData)
     return data

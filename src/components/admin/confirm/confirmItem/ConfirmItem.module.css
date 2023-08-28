@@ -1,7 +1,11 @@
 .immg {
-    width: 25vw;
-    height: 13vw;
+    height: 100%;
+    width: 26%;
+    object-fit: fill;
     border-radius: 8px 0px 0px 8px;
+}
+.container {
+    margin: auto 11vw;
 }
 
 .cart {
@@ -9,14 +13,17 @@
     display: flex;
     border-radius: 8px;
     margin-bottom: 20px;
+    height: 14vw;
 
 }
 
 .content {
-    width: 61%;
+    width: 74%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0 auto;
+
 }
 
 .artist {
@@ -31,56 +38,68 @@
     align-items: center;
 
 }
-.artist_and_delete {
+.desAndDownload {
     display: flex;
     justify-content: space-between;
 
 }
-.artist_and_delete .delete{
-    margin: 20px;
-}
-.artist_and_delete .delete button{
+
+.desAndDownload .delete button{
     margin-top: 0;
     height: 40px;
 }
 
-.artist img {
-    width: 70px;
-    height: 70px;
-    border-radius: 100px    ;
+.desAndDownload textarea{
+    width: 85%;
+    font-size: 16px;
+    background-color: #3d4e50;
+    padding-left: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    margin: 20px 20px 0px 30px;
 }
 
-.artist span {
-    margin-left: 20px;
-    padding-right: 110px;
-}
-
-.tags {
+.buttons {
     display: flex;
+    justify-content: space-between;
+    width: 85%;
+
+
     margin-left: 30px;
 }
-.tag {
-    background-color: #091010;
-    padding: 15px;
-    border-radius: 120px;
-    margin-right: 10px;
-
+.buttons button{
+    height: 60px;
+    width: 10vw;
+    margin-right: 30px;
+}
+.downloadButton {
+    border: 1px solid #B5FBF9!important;
+    text-align: center!important;
+    color: #B5FBF9!important;
+    width: 6vw!important;
+    cursor: pointer!important;
+    font-weight: 600!important;
+    font-size: 20px!important;
+    margin-right: -40px!important;
+    background: rgba(255, 255, 255, 0);
 }
 
 .name_and_price {
     display: flex;
-    padding: 10px 20px;
+    padding: 20px 30px;
     justify-content: space-between;
 
 }
 
 .name {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .price {
     color: #61dafb;
-    font-size: 16px;
+    font-size: 20px;
 }
 .modal {
     height: 100vh;

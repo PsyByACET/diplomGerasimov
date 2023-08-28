@@ -16,6 +16,9 @@ import {useModelStore} from "./store/ModelStore";
 import ProfileUser from "./components/ProileUser/ProfileUser";
 import ShopBasket from "./components/ShopBasket/ShopBasket";
 import Confirm from "./components/admin/confirm/Confirm";
+import CancelCarts from "./components/ProileUser/CancelCarts/CancelCarts";
+import About from "./components/Other/About/About";
+import FAQ from "./components/Other/FAQ/FAQ";
 
 const App = () => {
 
@@ -63,13 +66,16 @@ const App = () => {
             <Route path="/authorization"  element={<Authorization />}  />
             <Route path="/upl"  element={<TestDow />}  />
             <Route path="/confirm"  element={<Confirm />}  />
+            <Route path="/cancel"  element={<CancelCarts />}  />
+            <Route path="/about"  element={<About />}  />
+            <Route path="/faq"  element={<FAQ />}  />
             {/*{userStore.user.id && (*/}
             {/*    <Route path="/shopbasket" element={<ShopBasket />} />*/}
             {/*)}*/}
             <Route path="/shopbasket" element={<ShopBasket />} />
 
             <Route path="/user/:id" element={<ProfileUser  />} />
-            <Route path="/add" element={<AddCart />} />
+            <Route path="/add/*" element={<AddCart />} />
 
         </Routes>
       </div>

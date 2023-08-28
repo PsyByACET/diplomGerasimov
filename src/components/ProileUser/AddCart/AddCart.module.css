@@ -10,8 +10,13 @@
     flex-direction: column;
     z-index: 2;
 }
+.final {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 30px;
+}
 
-.add_cart_block input, .add_cart_block textarea {
+.fileInput input, .add_cart_block textarea, .final input, .tag, .name_and_price input {
     height: 65px;
     font-size: 20px;
     background-color: #3d4e50;
@@ -25,6 +30,10 @@
 textarea {
     resize: none;
     padding: 20px;
+}
+.fileInput {
+    display: flex;
+    justify-content: space-between;
 }
 
 input:-webkit-autofill,
@@ -44,10 +53,22 @@ input:-webkit-autofill:focus {
 .category_trigger {
     cursor: pointer;
 }
+.nameBlock {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.test {
+    display: flex;
+}
 
 .category .dropdown_menu {
     top: 200px;
     left: 35px;
+}
+ul {
+    padding-inline-start: 0px;
 }
 
 .dropdown_menu {
@@ -108,4 +129,18 @@ body {
     background-color: #efefef;
 }
 
+input[type="file"] {
+    display: none;
+}
+.customFileUpload {
+    height: 65px;
+    width: 22vw;
+    font-size: 20px;
+    background-color: #3d4e50;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border: none;
+    outline:none;
+}
 

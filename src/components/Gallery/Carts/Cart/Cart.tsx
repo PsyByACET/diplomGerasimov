@@ -12,13 +12,13 @@ const Cart = observer( ({cart}:{cart:iModel}) => {
         document.body.style.overflow=status?"hidden":"auto";
     }
 
+
     return (
         <div>
             <div onClick={()=> changeCartDisplay(true)}  className={s.cart}>
                 <img className={s.immg} src={process.env.REACT_APP_API_URL + "photoModel/" + cart.link_photo} alt=""/>
                 <div className={s.name_and_price}>
                     <span className={s.name}>{cart.name}</span>
-                    <span className={s.name}>{cart.artist.id}</span>
                     <span className={s.price}>{cart.price}руб</span>
                 </div>
             </div>

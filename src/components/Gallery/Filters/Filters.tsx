@@ -43,6 +43,7 @@ const Filters = ({nameBlock,categories_list,nameText}:{nameBlock:string,categori
 
     }
 
+
     return (
         <div className={s.nameBlock}>
             <span>{nameText}</span>
